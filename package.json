@@ -1,0 +1,22 @@
+{
+  "name": "action-library",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tiffany Kalin",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "express": "^4.17.1",
+    "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.3"
+  },
+  "description": ""
+}
