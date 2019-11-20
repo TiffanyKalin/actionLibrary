@@ -10,7 +10,7 @@ export class ActionController {
             res.json(JSON.parse(stats));
         } catch(e) {
             console.log(e);
-            res.status(400).send("Error occurred adding action");
+            res.status(400).send("Error occurred getting stats");
         }
     }
 
