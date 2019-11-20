@@ -47,6 +47,8 @@ In addition to the test plan outlined above, we created a testPlan_error.jmx tes
 2. The POST body data is in the wrong format. 
 3. The path given is not /addAction or /getStats
 
+This can also be loaded into Apache Jmeter for error testing. Both plans allow for further testing items to be added. 
+
 
 # Future Considerations
 Some future considerations for this work:
