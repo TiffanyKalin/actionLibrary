@@ -7,6 +7,7 @@ export class ActionController {
     async getStats(req: Request, res: Response, next: NextFunction) {
         try {
             let stats = await ActionLibrary.getStats();
+            //So the JSON format is returned, we parse the given string
             res.json(JSON.parse(stats));
         } catch(e) {
             console.log(e);
@@ -30,6 +31,7 @@ export class ActionController {
                 }
             }
             else {
+                //Error parsing the body
                 console.log(req.body);
                 res.status(400).json("Error occurred parsing post body");
             }

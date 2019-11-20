@@ -12,6 +12,7 @@ export class ActionLibrary {
             action["avg"] = this.actions[key].average;
             stats.push(action);
         }
+        //So a string is returned, we stringify it
         return JSON.stringify(stats);
     }
 

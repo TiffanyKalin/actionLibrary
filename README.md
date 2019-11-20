@@ -42,10 +42,12 @@ The code was organized in this way to facilitate testing and concurrency. NodeJS
 # Testing
 Testing was done by calling the APIs appropriately as described above in Intended Uses. We used Apache Jmeter (https://jmeter.apache.org/) to perform testing as it provides a good concurrency testing functionality. In the <root project directory>/testing folder, there is a testPlan.jmx that can be loaded into Apache Jmeter. In this test, three separate 'users' at the same time post to the addAction API. These users post the sample strings given in the assignment writeup. This tests the addAction function as well as its concurrency functionalty. 1 second after these users have completed, then we have three users at the same time call the getStats API. This tests the getStats functionality can have concurrent calls. We delay so as to have the posting finished so we can check that the data is consistent across the three getting users. 
 
+After running in Jmeter, verify in the View Results tree all `Test addAction` have a response code of 200 and response data of `Successful add`. Verify that the `Test getStats` view result tree has three successful items and all three have response code of 200 and all three have response data equal to the one given in the assignment other than order. 
+
 In addition to the test plan outlined above, we created a testPlan_error.jmx test plan to showcase common errors with the posting:
-1. application/json not given as Content-Type
-2. The POST body data is in the wrong format. 
-3. The path given is not /addAction or /getStats
+1. `Test wrong content type`: application/json not given as Content-Type. In the view results tree, it should have a response code of 400 and response data of ""Error occurred parsing post body"
+2. `Test bad post format`: The POST body data is in the wrong format. In the view results tree, it should have a response code of 400 and response data of ""Error occurred parsing post body"
+3. `Test no path given`: The path given is not /addAction or /getStats. In the view results tree, it should have a response code of 404 and response data of an HTML page saying the given path is not found. 
 
 This can also be loaded into Apache Jmeter for error testing. Both plans allow for further testing items to be added. 
 
@@ -57,6 +59,7 @@ Some future considerations for this work:
 3. Add more error code types or a custom error class to the addAction piece. 
 4. Configure the environment (port, url, etc.) to run in a chosen production environment. 
 5. Expand POST addAction to accept text in the right format also. As the assignment specified a JSON serialized string, we assumed application/json was acceptable as the content type. 
+6. Caching for getStats
 
 
 
