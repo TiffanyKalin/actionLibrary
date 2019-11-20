@@ -3,6 +3,7 @@ import {Request, Response} from "express";
 import {Routes} from "./routes";
 import * as bodyParser from "body-parser";
 
+//setup app
 const app = express();
 const port = 3000;
 app.use(bodyParser.json());
@@ -19,7 +20,7 @@ Routes.forEach(route => {
     });
 });
 
-
+//start app
 app.listen(port, err => {
     if (err) {
         return console.error(err);
