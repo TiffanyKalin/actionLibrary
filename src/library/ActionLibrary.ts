@@ -8,10 +8,11 @@ export class ActionLibrary {
         //Loop through actions and put into array
         for (var key in this.actions) {
             let action = {};
-            action[key] = this.actions[key];
+            action["action"] = key;
+            action["avg"] = this.actions[key].average;
             stats.push(action);
         }
-        return stats;
+        return JSON.stringify(stats);
     }
 
     /** getStats() function required for this library**/
@@ -23,14 +24,25 @@ export class ActionLibrary {
     /** addAction function required for this library **/
     /** @param item The item to add to actions **/
     static async addAction(item) {
-        this.actions[item.action] = await item.time;
-        //Check that it was added correctly, return status appropriately
-        if (this.actions[item.action] == item.time) {
+        try {
+            //Check if action is in array yet, add it if not
+            if(!(this.actions.hasOwnProperty(item.action))) {
+                this.actions[item.action] = {"average": 0.0, "total": 0.0, "number": 0};
+            }
+
+            //Calculate average time and save it
+            let currAction = await this.actions[item.action];
+            let number = await currAction.number+1;
+            let totalTime = await (item.time+currAction.total);
+            let average = await totalTime / number;
+            this.actions[item.action] = {"average": average, "total": totalTime, "number": number};
             return 200;
-        }
-        else {
+        } catch(e) {
+            //Return 400 if any error occurs
+            console.log(e)
             return 400;
         }
+
     }
 
 }
