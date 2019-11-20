@@ -7,7 +7,7 @@ export class ActionController {
     async getStats(req: Request, res: Response, next: NextFunction) {
         try {
             let stats = await ActionLibrary.getStats();
-            res.json(stats);
+            res.json(JSON.parse(stats));
         } catch(e) {
             console.log(e);
             res.status(400).send("Error occurred adding action");
